@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright (c) 2025. Volodymyr Hryvinskyi. All rights reserved.
+ * Author: Volodymyr Hryvinskyi <volodymyr@hryvinskyi.com>
+ * GitHub: https://github.com/hryvinskyi
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="hryvinskyi_error_reporting_log" resource="default" engine="innodb"
+           comment="Error Reporting Log">
+        <column xsi:type="int" name="log_id" unsigned="true" nullable="false" identity="true"
+                comment="Log ID"/>
+        <column xsi:type="varchar" name="error_hash" nullable="false" length="64"
+                comment="Error Hash"/>
+        <column xsi:type="varchar" name="error_type" nullable="true" length="255"
+                comment="Error Type (class name)"/>
+        <column xsi:type="text" name="error_message" nullable="true"
+                comment="Error Message"/>
+        <column xsi:type="varchar" name="error_file" nullable="true" length="500"
+                comment="File Where Error Occurred"/>
+        <column xsi:type="int" name="error_line" nullable="true" unsigned="true"
+                comment="Line Number"/>
+        <column xsi:type="varchar" name="severity" nullable="true" length="50"
+                comment="Severity Level"/>
+        <column xsi:type="varchar" name="request_url" nullable="true" length="1024"
+                comment="Request URL"/>
+        <column xsi:type="smallint" name="store_id" nullable="true" unsigned="true"
+                comment="Store ID"/>
+        <column xsi:type="varchar" name="request_area" nullable="true" length="50"
+                comment="Request Area (frontend, adminhtml, webapi_rest, etc.)"/>
+        <column xsi:type="text" name="notifications_sent" nullable="true"
+                comment="Notifications Sent (JSON map of handler => success)"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false"
+                default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="log_id"/>
+        </constraint>
+        <index referenceId="HRYVINSKYI_ERROR_REPORTING_LOG_ERROR_HASH" indexType="btree">
+            <column name="error_hash"/>
+        </index>
+        <index referenceId="HRYVINSKYI_ERROR_REPORTING_LOG_CREATED_AT" indexType="btree">
+            <column name="created_at"/>
+        </index>
+    </table>
+</schema>

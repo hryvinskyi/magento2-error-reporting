@@ -18,6 +18,9 @@
                         </resource>
                     </resource>
                 </resource>
+                <resource id="Magento_Backend::system">
+                    <resource id="Hryvinskyi_ErrorReporting::errorlog" title="Error Reporting Log" sortOrder="110"/>
+                </resource>
             </resource>
         </resources>
     </acl>

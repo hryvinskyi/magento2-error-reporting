@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright (c) 2025. Volodymyr Hryvinskyi. All rights reserved.
+ * Author: Volodymyr Hryvinskyi <volodymyr@hryvinskyi.com>
+ * GitHub: https://github.com/hryvinskyi
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">hryvinskyi_errorlog_listing.hryvinskyi_errorlog_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>hryvinskyi_errorlog_columns</spinner>
+        <deps>
+            <dep>hryvinskyi_errorlog_listing.hryvinskyi_errorlog_listing_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="hryvinskyi_errorlog_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">log_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Hryvinskyi_ErrorReporting::errorlog</aclResource>
+        <dataProvider class="Hryvinskyi\ErrorReporting\Model\ErrorLog\DataProvider"
+                      name="hryvinskyi_errorlog_listing_data_source">
+            <settings>
+                <requestFieldName>log_id</requestFieldName>
+                <primaryFieldName>log_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+
+    <columns name="hryvinskyi_errorlog_columns">
+        <settings>
+            <editorConfig>
+                <param name="enabled" xsi:type="boolean">false</param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">hryvinskyi_errorlog_listing.hryvinskyi_errorlog_listing.hryvinskyi_errorlog_columns.ids</item>
+                    <item name="target" xsi:type="string">rowClick</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${$.$data.rowIndex}</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+
+        <selectionsColumn name="ids" sortOrder="0">
+            <settings>
+                <indexField>log_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>55</resizeDefaultWidth>
+            </settings>
+        </selectionsColumn>
+
+        <column name="log_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+
+        <column name="error_type" sortOrder="20">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Error Type</label>
+            </settings>
+        </column>
+
+        <column name="error_message" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Error Message</label>
+            </settings>
+        </column>
+
+        <column name="severity" sortOrder="40">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Severity</label>
+            </settings>
+        </column>
+
+        <column name="error_file" sortOrder="50">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">File</label>
+            </settings>
+        </column>
+
+        <column name="error_line" sortOrder="60">
+            <settings>
+                <label translate="true">Line</label>
+            </settings>
+        </column>
+
+        <column name="request_url" sortOrder="70">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Request URL</label>
+            </settings>
+        </column>
+
+        <column name="store_id" sortOrder="80">
+            <settings>
+                <label translate="true">Store ID</label>
+            </settings>
+        </column>
+
+        <column name="request_area" sortOrder="85">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Area (Client / Developer)</label>
+            </settings>
+        </column>
+
+        <column name="notifications_sent" sortOrder="90">
+            <settings>
+                <label translate="true">Notifications Sent</label>
+            </settings>
+        </column>
+
+        <column name="error_hash" sortOrder="100">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Error Hash</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date" sortOrder="110">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Created At</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

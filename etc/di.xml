@@ -176,6 +176,13 @@
         </arguments>
     </type>
 
+    <!-- Log every dispatch to the admin error log table -->
+    <type name="Hryvinskyi\ErrorReporting\Model\Notification\NotificationDispatcher">
+        <plugin name="hryvinskyi_error_reporting_log_dispatch"
+                type="Hryvinskyi\ErrorReporting\Plugin\Notification\LogDispatchPlugin"
+                sortOrder="10"/>
+    </type>
+
     <!-- Plugin Configuration -->
     <type name="Magento\Framework\App\ExceptionHandler">
         <plugin name="hryvinskyi_error_reporting_exception_handler"

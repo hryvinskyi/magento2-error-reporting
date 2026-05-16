@@ -2,7 +2,7 @@
     "name": "hryvinskyi/magento2-error-reporting",
     "description": "Advanced error notification system for Magento 2 with spam prevention, and comprehensive error tracking.",
     "type": "magento2-module",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "license": "MIT",
     "authors": [
         {
@@ -14,6 +14,7 @@
     "require": {
         "php": "^8.1",
         "nyholm/psr7": "*",
+        "symfony/http-client": "^6.0 || ^7.0 || ^8.0",
         "hryvinskyi/magento2-base": "*",
         "magento/framework": "*",
         "magento/module-store": "*",
